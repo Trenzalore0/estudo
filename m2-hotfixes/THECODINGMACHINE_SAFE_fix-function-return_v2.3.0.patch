@@ -1,0 +1,25 @@
+From ced0901202434f30c8f5feb570cfa3fb4a665304 Mon Sep 17 00:00:00 2001
+From: Kleydson Vieira <kleydson@hibrido.com.br>
+Date: Sun, 18 Sep 2022 01:27:09 -0300
+Subject: [PATCH] patch
+
+---
+ vendor/thecodingmachine/safe/lib/special_cases.php | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/vendor/thecodingmachine/safe/lib/special_cases.php b/vendor/thecodingmachine/safe/lib/special_cases.php
+index a4e85a939..401d2a517 100644
+--- a/vendor/thecodingmachine/safe/lib/special_cases.php
++++ b/vendor/thecodingmachine/safe/lib/special_cases.php
+@@ -431,7 +431,7 @@ function fputcsv($stream, array $fields, string $separator = ",", string $enclos
+  * @throws FilesystemException
+  *
+  */
+-function fgetcsv($stream, int $length = null, string $separator = ",", string $enclosure = "\"", string $escape = "\\"): array|false
++function fgetcsv($stream, int $length = null, string $separator = ",", string $enclosure = "\"", string $escape = "\\")
+ {
+     error_clear_last();
+     $safeResult = \fgetcsv($stream, $length, $separator, $enclosure, $escape);
+-- 
+2.37.3
+
