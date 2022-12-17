@@ -15,6 +15,9 @@
             "magento/composer-root-update-plugin": true,
             "magento/inventory-composer-installer": true,
             "magento/magento-composer-installer": true
+        },
+        "platform": {
+            "php": "7.4"
         }
     },
     "require": {
@@ -39,7 +42,9 @@
         "magento/module-widget-sample-data": "100.4.*",
         "magento/module-wishlist-sample-data": "100.4.*",
         "magento/product-community-edition": "2.4.0",
-        "magento/sample-data-media": "100.4.*"
+        "magento/sample-data-media": "100.4.*",
+        "psr/cache": "1.0.1",
+        "thecodingmachine/safe": "1.x-dev"
     },
     "require-dev": {
         "allure-framework/allure-phpunit": "~1.2.0",
@@ -100,6 +105,11 @@
         }
     ],
     "extra": {
-        "magento-force": "override"
+        "magento-force": "override",
+        "patches" : {
+            "thecodingmachine/safe": {
+                "fix-function-return": "./m2-hotfixes/THECODINGMACHINE_SAFE_fix-function-return_v2.3.0.patch"
+            }
+        }
     }
 }
