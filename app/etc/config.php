@@ -308,6 +308,8 @@ return [
         'Amazon_Payment' => 1,
         'Dotdigitalgroup_Email' => 1,
         'Dotdigitalgroup_Chat' => 1,
+        'Hibrido_ChangeColor' => 0,
+        'Hibrido_MetaTag' => 0,
         'Klarna_Core' => 1,
         'Klarna_Ordermanagement' => 1,
         'Klarna_Onsitemessaging' => 1,
