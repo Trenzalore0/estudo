@@ -1,0 +1,26 @@
+<?php
+/** @var \Trenzalore\Learn\Block\Knockout\Index $block */
+?>
+
+<div id="myContainer" data-bind="scope: 'containerTest'">
+    <!-- ko template: getTemplate() --><!-- /ko -->
+
+</div>
+
+
+<script type="text/x-magento-init">
+{
+    "#myContainer": {
+        "Magento_Ui/js/core/app": {
+            "components" : {
+                "containerTest": {
+                    "component": "Trenzalore_Learn/js/test",
+                    "config": {
+                        "template": "Trenzalore_Learn/test"
+                    }
+                }
+            }
+        }
+    }
+}
+</script>

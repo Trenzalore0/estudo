@@ -317,6 +317,10 @@ return [
         'PayPal_Braintree' => 1,
         'PayPal_BraintreeGraphQl' => 1,
         'Temando_ShippingRemover' => 1,
+        'Trenzalore_Learn' => 1,
+        'Trenzalore_Ofex' => 0,
+        'Trenzalore_Thermometer' => 0,
+        'Trenzalore_TodoList' => 1,
         'Vertex_Tax' => 1,
         'Vertex_AddressValidation' => 1,
         'Yotpo_Yotpo' => 1
