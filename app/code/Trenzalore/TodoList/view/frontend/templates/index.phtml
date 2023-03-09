@@ -1,0 +1,21 @@
+<?php
+/** @var \Trenzalore\TodoList\Block\Index $block */
+?>
+
+<div class="tr_main" data-bind="scope: 'todo-list'">
+    <!-- ko template: getTemplate() --><!-- /ko -->
+</div>
+
+<script type="text/x-magento-init">
+    {
+        "*": {
+            "Magento_Ui/js/core/app": {
+                "components": {
+                    "todo-list": {
+                        "component": "Trenzalore_TodoList/js/todolist/index"
+                    }
+                }
+            }
+        }
+    }
+</script>

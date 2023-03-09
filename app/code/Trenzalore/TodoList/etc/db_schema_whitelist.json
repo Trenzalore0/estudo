@@ -2,28 +2,16 @@
     "todo_list": {
         "column": {
             "entity_id": true,
-            "list": true
-        },
-        "constraint": {
-            "PRIMARY": true,
-            "TODO_LIST_ENTITY_ID": true
-        }
-    },
-    "customer_to_todo_list": {
-        "column": {
-            "entity_id": true,
-            "todo_list_id": true,
+            "list": true,
             "customer_id": true
         },
-        "index": {
-            "CUSTOMER_TO_TODO_LIST_TODO_LIST_ID": true,
-            "CUSTOMER_TO_TODO_LIST_CUSTOMER_ID": true
-        },
         "constraint": {
             "PRIMARY": true,
-            "CUSTOMER_TO_TODO_LIST_ENTITY_ID": true,
-            "CUSTOMER_TO_TODO_LIST_TODO_LIST_ID_TODO_LIST_ENTITY_ID": true,
-            "CUSTOMER_TO_TODO_LIST_CUSTOMER_ID_CUSTOMER_ENTITY_ENTITY_ID": true
+            "TODO_LIST_ENTITY_ID": true,
+            "TODO_LIST_CUSTOMER_ID_CUSTOMER_ENTITY_ENTITY_ID": true
+        },
+        "index": {
+            "TODO_LIST_CUSTOMER_ID": true
         }
     }
 }

@@ -1,0 +1,32 @@
+<div class="tr_actions">
+    <a class="tr_button tr_button_back" id="tr_button_new" type="button" data-bind="attr: { href: urlBack }">
+        <!-- ko i18n: 'back' --><!-- /ko -->
+    </a>
+</div>
+<hr>
+<div class="tr_list">
+
+    <input type="text" name="todolist_title" data-bind="attr: { value: todoListTitle }">
+
+    <hr>
+
+    <div class="tr_item_create">
+        <div class="inputs">
+            <input type="text" name="title_item" data-bind="attr: { value: itemTitle }">
+            <input type="number" name="value_item" data-bind="attr: { value: itemValue }">
+            <input type="date" name="date_item" data-bind="attr: { value: itemDate }" >
+        </div>
+    </div>
+    <input type="button" name="add_item" value="add" data-bind="click: addItemOnList">
+    <hr>
+
+    <ul data-bind="foreach: todoList">
+        <li>
+            <span data-bind="text: title"></span>
+            <span data-bind="text: value"></span>
+            <a href="#" data-bind="click: $parent.removeItem($parent, $data)">x</a>
+        </li>
+    </ul>
+
+
+</div>

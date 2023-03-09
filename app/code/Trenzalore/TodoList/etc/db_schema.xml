@@ -5,6 +5,7 @@
     <table name="todo_list" resource="default" engine="innodb" comment="Table comment">
         <column xsi:type="int" name="entity_id" unsigned="false" nullable="false" identity="true" comment="Entiry Id" />
         <column xsi:type="varchar" name="list" nullable="false" length="700" comment="Json todo list" />
+        <column xsi:type="int" name="customer_id" unsigned="true" nullable="true" identity="false" comment="Customer Entity Id" />
 
         <constraint xsi:type="primary" referenceId="PRIMARY">
             <column name="entity_id" />
@@ -14,41 +15,14 @@
             <column name="entity_id" />
         </constraint>
 
-    </table>
-
-    <table name="customer_to_todo_list">
-        <column xsi:type="int" name="entity_id" unsigned="false" nullable="false" identity="true" comment="Entity Id" />
-        <column xsi:type="int" name="todo_list_id" unsigned="false" nullable="false" identity="false" comment="Todo List Entity Id" />
-        <column xsi:type="int" name="customer_id" unsigned="true" nullable="true" identity="false" comment="Customer Entity Id" />
-            
-        <constraint xsi:type="primary" referenceId="PRIMARY">
-            <column name="entity_id" />
-        </constraint>
-
-        <constraint xsi:type="unique" referenceId="CUSTOMER_TO_TODO_LIST_ENTITY_ID">
-            <column name="entity_id"/>
-        </constraint>
-    
         <constraint 
-            xsi:type="foreign" referenceId="CUSTOMER_TO_TODO_LIST_TODO_LIST_ID_REFERENCE_TODO_LIST_ENTITY_ID"
-            table="customer_to_todo_list" column="todo_list_id"
-            referenceTable="todo_list" referenceColumn="entity_id" 
-            onDelete="CASCADE"
-        />
-
-        <constraint 
-            xsi:type="foreign" referenceId="CUSTOMER_TO_TODO_LIST_CUSTOMER_ID_REFERENCE_CUSTOMER_ENTITY_ENTITY_ID"
-            table="customer_to_todo_list" column="customer_id"
-            
+            xsi:type="foreign" referenceId="TODO_LIST_CUSTOMER_ID_REFERENCE_CUSTOMER_ENTITY_ENTITY_ID"
+            table="todo_list" column="customer_id"
             referenceTable="customer_entity" referenceColumn="entity_id"
             onDelete="CASCADE"
         />
 
-        <index referenceId="CUSTOMER_TO_TODO_LIST_TODO_LIST_ID" indexType="btree">
-            <column name="todo_list_id" />
-        </index>
-
-        <index referenceId="CUSTOMER_TO_TODO_LIST_CUSTOMER_ID" indexType="btree">
+        <index referenceId="TODO_LIST_CUSTOMER_ID" indexType="btree">
             <column name="customer_id"/>
         </index>
 

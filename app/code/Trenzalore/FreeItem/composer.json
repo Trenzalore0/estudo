@@ -1,5 +1,5 @@
 {
-    "name": "trenzalore/module-todo-list",
+    "name": "trenzalore/freeitem",
     "description": "",
     "type": "magento2-module",
     "version": "1.0.0",
@@ -8,7 +8,7 @@
     ],
     "autoload": {
       "psr-4": {
-        "Trenzalore\\TodoList\\": ""
+        "Trenzalore\\FreeItem\\": ""
       },
       "files": [
         "registration.php"
