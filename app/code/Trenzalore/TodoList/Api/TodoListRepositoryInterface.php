@@ -12,21 +12,21 @@ use Magento\Framework\Exception\NoSuchEntityException;
 interface TodoListRepositoryInterface
 {
     /**
-     * @param int $id
+     * @param string|int $id
      * @return TodoListInterface
      * @throws NoSuchEntityException
      */
     public function getById($id);
 
     /**
-     * @param int $id
+     * @param string|int $id
      * @throws NoSuchEntityException
      */
     public function deleteById($id);
 
     /**
-     * @param int $customerId
-     * @return TodoListInterface
+     * @param string|int $customerId
+     * @return array
      * @throws NoSuchEntityException
      */
     public function getByCustomerId($customerId);

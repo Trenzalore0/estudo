@@ -10,7 +10,7 @@ use Trenzalore\TodoList\Model\ResourceModel\TodoList as ResourceModelTodoList;
 
 class TodoList extends AbstractModel implements TodoListInterface
 {
-    protected function _construct()
+    public function _construct()
     {
         $this->_init(ResourceModelTodoList::class);
     }
@@ -43,5 +43,15 @@ class TodoList extends AbstractModel implements TodoListInterface
     public function setCustomerId($customerId)
     {
         return $this->setData(self::TODO_LIST_CUSTOMER_ID, $customerId);
+    }
+
+    public function getTitle()
+    {
+        return $this->getData(self::TODO_LIST_TITLE);
+    }
+
+    public function setTitle($title)
+    {
+        return $this->setData(self::TODO_LIST_TITLE, $title);
     }
 }

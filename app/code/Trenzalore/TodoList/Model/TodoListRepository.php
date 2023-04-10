@@ -4,9 +4,11 @@ declare(strict_types=1);
 
 namespace Trenzalore\TodoList\Model;
 
-use Psr\Log\LoggerInterface;
+use Psr\Log\LoggerInterface as Logger;
+use Magento\Framework\Api\FilterBuilder;
 use Magento\Framework\Api\SearchResultsInterface;
 use Magento\Framework\Api\SearchCriteriaInterface;
+use Magento\Framework\App\Request\Http as Request;
 use Trenzalore\TodoList\Api\Data\TodoListInterface;
 use Magento\Framework\Exception\CouldNotSaveException;
 use Magento\Framework\Exception\NoSuchEntityException;
@@ -21,9 +23,19 @@ use Trenzalore\TodoList\Model\ResourceModel\TodoList\CollectionFactory as TodoLi
 class TodoListRepository implements TodoListRepositoryInterface
 {
     /**
-     * @var LoggerInterface
+     * @var Logger
      */
     private $logger;
+
+    /**
+     * @var Request
+     */
+    private $request;
+
+    /**
+     * @var FilterBuilder
+     */
+    private $filterBuilder;
 
     /**
      * @var TodoListModelFactory
@@ -56,7 +68,9 @@ class TodoListRepository implements TodoListRepositoryInterface
     private $searchResultsFactory;
 
     /**
-     * @param LoggerInterface $logger
+     * @param Logger $logger
+     * @param Request $request
+     * @param FilterBuilder $filterBuilder
      * @param TodoListModelFactory $todoListModelFactory
      * @param SearchCriteriaBuilder $searchCriteriaBuilder
      * @param TodoListResourceModel $todoListResourceModel
@@ -65,7 +79,9 @@ class TodoListRepository implements TodoListRepositoryInterface
      * @param SearchResultsInterfaceFactory $searchResultsFactory
      */
     public function __construct(
-        LoggerInterface $logger,
+        Logger $logger,
+        Request $request,
+        FilterBuilder $filterBuilder,
         TodoListModelFactory $todoListModelFactory,
         SearchCriteriaBuilder $searchCriteriaBuilder,
         TodoListResourceModel $todoListResourceModel,
@@ -74,6 +90,8 @@ class TodoListRepository implements TodoListRepositoryInterface
         SearchResultsInterfaceFactory $searchResultsFactory
     ) {
         $this->logger = $logger;
+        $this->request = $request;
+        $this->filterBuilder = $filterBuilder;
         $this->todoListModelFactory = $todoListModelFactory;
         $this->searchCriteriaBuilder = $searchCriteriaBuilder;
         $this->todoListResourceModel = $todoListResourceModel;
@@ -83,7 +101,7 @@ class TodoListRepository implements TodoListRepositoryInterface
     }
 
     /**
-     * @param int $id
+     * @param string|int $id
      * @return TodoListInterface
      * @throws NoSuchEntityException
      */
@@ -98,7 +116,7 @@ class TodoListRepository implements TodoListRepositoryInterface
     }
 
     /**
-     * @param int $id
+     * @param string|int $id
      * @throws NoSuchEntityException
      */
     public function deleteById($id)
@@ -107,18 +125,24 @@ class TodoListRepository implements TodoListRepositoryInterface
     }
 
     /**
-     * @param int $customerId
-     * @return TodoListInterface
+     * @param string|int $customerId
+     * @return array
      * @throws NoSuchEntityException
      */
     public function getByCustomerId($customerId)
     {
-        $todoList = $this->todoListModelFactory->create();
-        $this->todoListResourceModel->load($todoList, $customerId, TodoListInterface::TODO_LIST_CUSTOMER_ID);
-        if (!$todoList->getEntityId()) {
-            throw new NoSuchEntityException(__("Todo List with Customer id %1 does not exists", $customerId));
+        $todoListArray = $this->getList(
+            $this->searchCriteriaBuilder->addFilter(
+                $this->filterBuilder->setField(TodoListInterface::TODO_LIST_CUSTOMER_ID)
+                    ->setValue($customerId)
+                    ->setConditionType('eq')
+                    ->create()
+            )->create()
+        )->getItems();
+        if (empty($todoListArray)) {
+            $this->logger->error(__('Todo List with Customer id %1 does not exists', $customerId));
         }
-        return $todoList;
+        return $todoListArray;
     }
 
     /**
@@ -132,7 +156,7 @@ class TodoListRepository implements TodoListRepositoryInterface
             if ($this->request->getMethod() === "PUT") {
 
                 if (!$todoList->getEntityId()) {
-                    throw new CouldNotSaveException(__("Id need to be specified"));
+                    throw new CouldNotSaveException(__('Id need to be specified'));
                 }
 
                 $originalClass = $this->getById($todoList->getEntityId());

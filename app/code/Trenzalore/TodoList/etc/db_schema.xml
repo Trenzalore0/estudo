@@ -1,11 +1,13 @@
 <?xml version="1.0"?>
+
 <schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
 
     <table name="todo_list" resource="default" engine="innodb" comment="Table comment">
         <column xsi:type="int" name="entity_id" unsigned="false" nullable="false" identity="true" comment="Entiry Id" />
         <column xsi:type="varchar" name="list" nullable="false" length="700" comment="Json todo list" />
-        <column xsi:type="int" name="customer_id" unsigned="true" nullable="true" identity="false" comment="Customer Entity Id" />
+        <column xsi:type="int" name="customer_id" unsigned="true" nullable="false" identity="false" comment="Customer Entity Id" />
+        <column xsi:type="varchar" name="title" nullable="true" comment="todo list title" />
 
         <constraint xsi:type="primary" referenceId="PRIMARY">
             <column name="entity_id" />

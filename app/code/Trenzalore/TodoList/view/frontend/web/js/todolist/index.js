@@ -1,10 +1,11 @@
 define([
     'uiComponent',
     'ko',
-    'mage/url'
-], function(Component, ko, urlBuilder) {
+    'mage/url',
+    'mage/storage'
+], function (Component, ko, urlBuilder, storage) {
     'use strict';
-    
+
     return Component.extend({
 
         defaults: {
@@ -15,9 +16,17 @@ define([
 
         initialize() {
             this._super();
-            
+            storage.get('rest/default/V1/todo-list')
+            .done(
+                (result) => {
+                    this.lists(JSON.parse(result))
+                }
+            ).fail(
+                (result) => {
+                    console.log(result);
+                }
+            );
         },
 
     });
-
 });

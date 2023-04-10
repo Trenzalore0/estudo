@@ -40,9 +40,9 @@ class Get
 
         $store = (int) $store;
         $row = $this->_storeColorFactory->create()
-        ->getCollection()
-        ->addFieldToFilter('store_id', $store)
-        ->getFirstItem();
+            ->getCollection()
+            ->addFieldToFilter('store_id', $store)
+            ->getFirstItem();
 
         return $row->getData('color');
     }

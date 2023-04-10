@@ -43,6 +43,12 @@ class SetFreeItem implements ObserverInterface
      */
     private $_toOrderItemConverter;
 
+    /**
+     * @param LoggerInterface $logger
+     * @param ProductRepositoryInterface $productRepository
+     * @param QuoteRepository $quoteRepository
+     * @param ToOrderItemConverter $toOrderItemConverter
+     */
     public function __construct(
         LoggerInterface $logger,
         ProductRepositoryInterface $productRepository,

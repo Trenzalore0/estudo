@@ -2,13 +2,20 @@
 
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
-    <update handle="customer_account"/>
+    <update handle="customer_account" />
+    <head>
+        <title>My Todo List's</title>
+    </head>
     <body>
+        <referenceBlock name="page.main.title">
+            <action method="setPageTitle">
+                <argument translate="true" name="title" xsi:type="string">My Todo List's</argument>
+            </action>
+        </referenceBlock>
         <referenceContainer name="content">
-            <block 
-                class="Trenzalore\TodoList\Block\Index" 
-                name="trenzalore.todolist.index" 
-                template="Trenzalore_TodoList::index.phtml" 
+            <block
+                name="trenzalore.todolist.index"
+                template="Trenzalore_TodoList::index.phtml"
                 cacheable="false"
             />
         </referenceContainer>

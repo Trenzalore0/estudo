@@ -1,32 +1,46 @@
 <div class="tr_actions">
-    <a class="tr_button tr_button_back" id="tr_button_new" type="button" data-bind="attr: { href: urlBack }">
+    <a class="tr_button tr_button_back" id="tr_button_back" data-bind="attr: { href: urlBack }">
         <!-- ko i18n: 'back' --><!-- /ko -->
     </a>
+    <input class="tr_button tr_button_save" type="button" name="tr_button_save" value="save" translate="'save'" data-bind="click: save" >
 </div>
 <hr>
 <div class="tr_list">
 
-    <input type="text" name="todolist_title" data-bind="attr: { value: todoListTitle }">
-
-    <hr>
-
-    <div class="tr_item_create">
-        <div class="inputs">
-            <input type="text" name="title_item" data-bind="attr: { value: itemTitle }">
-            <input type="number" name="value_item" data-bind="attr: { value: itemValue }">
-            <input type="date" name="date_item" data-bind="attr: { value: itemDate }" >
-        </div>
+    <div class="field">
+        <label for="todolist_title">Title:</label>
+        <input type="text" name="todolist_title" id="todolist_title" data-bind="value: todoListTitle, valueUpdate: 'afterkeydown'">
     </div>
-    <input type="button" name="add_item" value="add" data-bind="click: addItemOnList">
-    <hr>
 
+    <hr>
+    <form id="add-item" data-bind="function: { click: validate }">
+        <div class="tr_item_create">
+            <div class="inputs">
+                <div class="field">
+                    <label for="title_item">Item title:</label>
+                    <input type="text" name="title_item" id="title_item" required data-bind="value: itemTitle, valueUpdate: 'afterkeydown'">
+                </div>
+                <div class="field">
+                    <label for="value_item">Item value:</label>
+                    <input type="number" name="value_item" id="value_item" required data-bind="value: itemValue, valueUpdate: 'afterkeydown'">
+                </div>
+                <div class="field">
+                    <label for="date_item">Item date: </label>
+                    <input type="date" name="date_item" id="date_item" required data-bind="value: itemDate, valueUpdate: 'afterkeydown'">
+                </div>
+            </div>
+        </div>
+
+        <input class="tr_button tr_button_add" type="button" name="add_item" value="add" translate="'add'" data-bind="click: addItemOnList">
+    </form>
+    <hr>
     <ul data-bind="foreach: todoList">
         <li>
+            <span data-bind="text: date"></span>
             <span data-bind="text: title"></span>
             <span data-bind="text: value"></span>
-            <a href="#" data-bind="click: $parent.removeItem($parent, $data)">x</a>
+            <a  href="#" data-bind="click: () => { $parent.removeItem($data) }">x</a>
         </li>
     </ul>
-
 
 </div>
