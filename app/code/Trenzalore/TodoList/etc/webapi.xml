@@ -11,7 +11,7 @@
     <route url="/V1/todo-list" method="POST">
         <service class="Trenzalore\TodoList\Api\TodoListManagementInterface" method="save" />
         <resources>
-            <resource ref="anonymous" />
+            <resource ref="self" />
         </resources>
     </route>
 </routes>

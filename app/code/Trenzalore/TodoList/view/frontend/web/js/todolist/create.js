@@ -42,7 +42,7 @@ define([
                 this.todoList.push({
                     title: this.itemTitle(),
                     value: this.itemValue(),
-                    date: this.itemDate()
+                    date: this.itemDate().replaceAll('-', '/')
                 });
 
                 this.clearItemData();
@@ -82,5 +82,4 @@ define([
             return $form.valid()
         }
     });
-
 });

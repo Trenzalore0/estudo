@@ -9,7 +9,7 @@
     <ul>
         <!-- ko foreach: { data: lists, as: 'item' } -->
         <li data-bind="mageInit: { 'collapsible': { 'openedState': '_active', 'animate': { 'duration': 1000, 'easing': 'easeOutCubic' } } }">
-            <span data-bind="text: item.title" data-role="title"></span>
+            <a data-bind="text: item.title" data-role="title"></a>
             <ol data-role="content">
                 <!-- ko foreach: {data: JSON.parse(item.list), as: 'todoItem'} -->
                 <li>

@@ -310,6 +310,7 @@ return [
         'Dotdigitalgroup_Chat' => 1,
         'Hibrido_ChangeColor' => 0,
         'Hibrido_MetaTag' => 0,
+        'Hibrido_OpenaiProductDescription' => 0,
         'Klarna_Core' => 1,
         'Klarna_Ordermanagement' => 1,
         'Klarna_Onsitemessaging' => 1,
